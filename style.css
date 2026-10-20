@@ -780,7 +780,9 @@ ul {
 }
 
 .news-grid-latest-bottom {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 700px;
+    margin: 0 auto;
 }
 /* ===== VIDEO YOUTUBE (miniatura con enlace externo) ===== */
 .video-thumb-wrapper {
@@ -1306,5 +1308,41 @@ ul {
     
     .footer-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ===== GRILLA DE VIDEOS YOUTUBE (Prensa) ===== */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.video-grid .video-thumb-card {
+    background: var(--clr-blanco);
+}
+
+/* Si la cantidad de videos es impar, el último queda centrado */
+.video-grid .video-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 1rem);
+}
+
+@media (max-width: 576px) {
+    .video-grid .video-item:last-child:nth-child(odd) {
+        width: 100%;
+    }
+}
+
+.video-grid .video-thumb-card .video-thumb-img {
+    aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 576px) {
+    .video-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
