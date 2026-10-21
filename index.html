@@ -18,6 +18,53 @@
     <!-- Boxicons for icons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <script defer src="https://uthgra-umami.dsaibi.easypanel.host/script.js" data-website-id="1707a5dd-5f0c-46de-be39-bdd879236609"></script>
+    <style>
+        /* ===== POP-UP DE AVISO ===== */
+        .aviso-popup {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .aviso-popup.is-open {
+            display: flex;
+        }
+
+        .aviso-popup-box {
+            position: relative;
+            max-width: min(92vw, 640px);
+            max-height: 90vh;
+        }
+
+        .aviso-popup-box img {
+            display: block;
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .aviso-popup-close {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #000000;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+    </style>
 </head>
 
 <body>
@@ -387,6 +434,28 @@
         });
     </script>
 
+    <!-- Pop-up de aviso (se cierra solo a los 7 segundos) -->
+    <div class="aviso-popup" id="aviso-popup" role="dialog" aria-label="Aviso">
+        <div class="aviso-popup-box">
+            <button type="button" class="aviso-popup-close" id="aviso-popup-close" aria-label="Cerrar">&times;</button>
+            <img src="assets/aviso.28.09.26.jpg" alt="Aviso UTHGRA Rosario">
+        </div>
+    </div>
+    <script>
+        (function () {
+            var popup = document.getElementById('aviso-popup');
+            var timer;
+            function cerrar() {
+                popup.classList.remove('is-open');
+                clearTimeout(timer);
+            }
+            popup.classList.add('is-open');
+            timer = setTimeout(cerrar, 7000);
+            document.getElementById('aviso-popup-close').addEventListener('click', cerrar);
+            popup.addEventListener('click', function (e) { if (e.target === popup) cerrar(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
+        })();
+    </script>
 </body>
 
 </html>
